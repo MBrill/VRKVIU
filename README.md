@@ -2,7 +2,7 @@
 
 VR-Anwendungen mit Unity auf der Basis von HTC Vive Utility Plugin.
 
-Die verwendete Version von VIU (Stand Juli 2022) ist 1.15. 
+Die verwendete Version von VIU (Stand September 2022) ist 1.15. 
 
 Copyright (c) 2022 Manfred Brill
 **License**: [Creative Commons Attribution 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).  
