@@ -5,11 +5,11 @@
 *.swp
 
 # Andere Unity Verzeichnisse
-Unity/**/Library/*
-Unity/**/obj/*
-Unity/**/UserSettings/*
-Unity/**/ProjectSettings/*
-Unity/**/Logs/*
+**/Library/*
+**/obj/*
+**/UserSettings/*
+**/ProjectSettings/*
+**/Logs/*
 
 
 # Prerequisites
