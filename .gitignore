@@ -10,6 +10,8 @@
 **/UserSettings/*
 **/ProjectSettings/*
 **/Logs/*
+**/Logs/*.logs
+**/*.dwlt
 
 
 # Prerequisites
