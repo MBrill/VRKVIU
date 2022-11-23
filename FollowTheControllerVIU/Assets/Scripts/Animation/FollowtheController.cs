@@ -9,8 +9,8 @@ public enum controllerChoice
 }
 /// <summary>
 /// Ein Objekt, dem diese Klasse hinzugefügt wird 
-/// verfolgt ein Zielobjekt mit Hilfe von 
-/// Transform.MoveTowards und Transform.LookAt.
+/// verfolgt ein einen Controller im VIU Camera RightHand
+/// mit Hilfe von Transform.MoveTowards und Transform.LookAt.
 /// </summary>
 /// <remarks>
 /// In dieser Version können wir das Verfolgen an-
@@ -39,6 +39,7 @@ public class FollowtheController : MonoBehaviour
     /// </remarks>
     [Tooltip("Welcher Button auf dem Controller soll verwendet werden?")]
     public ControllerButton theButton = ControllerButton.Trigger;
+	
     /// <summary>
     /// Die Bewegung erfolgt, falls dieser logische Wert true ist.
     /// </summary>
@@ -51,14 +52,18 @@ public class FollowtheController : MonoBehaviour
     [Range(0.2F, 10.0F)]
     public float speed = 1.0F;
     /// <summary>
-    /// Position und Orientierung des verfolgten Controllers
+    /// GameObjevct des verfolgten Controllers in der Szene
     /// </summary>
     private GameObject player;
 
     /// <summary>
-    /// Handrodes ausgewählten Controllers
+    /// HandRole des ausgewählten Controllers
     /// </summary>
     private HandRole m_viveRole = HandRole.LeftHand;
+	
+	/// <summary>
+	/// Initialisierung und die HandRole setzen
+	/// </summary>
     private void Awake()
     {
         string[] names = new string[] { "LeftHand", "RightHand" };
@@ -76,32 +81,36 @@ public class FollowtheController : MonoBehaviour
     /// Bewegung in LateUpdate
     /// </summary>
     /// <remarks>
-    /// Erster Schritt: Button abfragen und bewege, falls gedrücktn.
-    /// Wir geben die forward-Richtung des gesteuerten Objekts
-    /// mit Hilfe von Debug.dDrawRay aus. Darauf achten, dass die
-    /// Ausgabe der Gizmos im Player aktiviert ist!
+    /// Erster Schritt: Button abfragen und bewegen, falls gedrückt.
+    /// Zweiter Schritt: 
     /// </remarks>
     private void LateUpdate ()
     {
-        Vector3 source = transform.position;
-        Vector3 target = player.transform.position;
-        
-        if (Move)
-        {
-            // Schrittweite
-            float stepSize = speed * Time.deltaTime;
-            // Neue Position berechnen
-            transform.position = Vector3.MoveTowards(source, target, stepSize);
-            // Orientieren mit FollowTheTarget - wir "schauen" auf das verfolgte Objekt
-            transform.LookAt(player.transform);
-        }
+        if (!Move)
+			return;
+
+		var source = transform.position;
+        var target = player.transform.position;
+			
+        // Schrittweite
+        var stepSize = speed * Time.deltaTime;
+        // Neue Position berechnen
+        transform.position = Vector3.MoveTowards(source, target, stepSize);
+        // Orientieren mit FollowTheTarget - wir "schauen" auf das verfolgte Objekt
+        transform.LookAt(player.transform);
     }
 
+    /// <summary>
+	/// Bewegung aktivieren
+	/// </summary>
     private void m_Go()
     {
         Move = true;
     }
     
+    /// <summary>
+	/// Bewegung de-aktivieren
+	/// </summary>
     private void m_Stop()
     {
         Move = false;
@@ -139,7 +148,5 @@ public class FollowtheController : MonoBehaviour
             ButtonEventType.Up,
             m_Stop);
         
-    }
-    
-  
+    } 
 }
